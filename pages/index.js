@@ -1,19 +1,11 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import Layout from '../components/Layout'
 
 export default function Home() {
 	return (
-		<div>
-			<Head>
-				<title>DJ events</title>
-				<meta
-					name='description'
-					content='DJ Events best place for staying informed.'
-				/>
-			</Head>
-
+		<Layout>
 			<h1>Home</h1>
-			<Link href='/about'>About</Link>
-		</div>
+		</Layout>
 	)
 }
