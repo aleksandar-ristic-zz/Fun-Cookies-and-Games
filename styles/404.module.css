@@ -1,0 +1,21 @@
+.error {
+	text-align: center;
+	margin: 100px 0 200px;
+}
+.error h1 {
+	font-size: 50px;
+}
+.error h1 svg {
+	color: red;
+	animation: grow 1s ease-out forwards;
+	transition: transform 0.5s ease;
+	transform-origin: center;
+}
+@keyframes grow {
+	from {
+		transform: scale(0) rotate(0);
+	}
+	to {
+		transform: scale(1) rotate(360deg);
+	}
+}
