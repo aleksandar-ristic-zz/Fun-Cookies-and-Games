@@ -1,0 +1,15 @@
+{
+	"events": [
+		{ "id": "1", "name": "blabla", "slug": "horseshoe" },
+		{
+			"id": "2",
+			"name": "truk truk",
+			"slug": "ratatata"
+		},
+		{
+			"id": "3",
+			"name": "blak blak",
+			"slug": "tinycreatures"
+		}
+	]
+}

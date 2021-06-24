@@ -8,7 +8,9 @@ export default function evenPage() {
 		<Layout title='My Event | DJ Events'>
 			<h1>My Event</h1>
 			<h3>{router.query.slug}</h3>
-			<button onClick={() => router.push('/')}>Home</button>
+			<button className='btn' onClick={() => router.push('/')}>
+				Home
+			</button>
 		</Layout>
 	)
 }
