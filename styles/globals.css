@@ -25,6 +25,17 @@ h1 {
 	margin-bottom: 20px;
 }
 
+h1 span {
+	color: red;
+	font-style: italic;
+}
+
+h3 span {
+	text-decoration: underline;
+	letter-spacing: 1px;
+	color: #444;
+}
+
 .btn {
 	display: inline-block;
 	background: red;
