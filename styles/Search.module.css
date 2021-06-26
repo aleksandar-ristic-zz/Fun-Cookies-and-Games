@@ -1,14 +1,30 @@
-.search input {
+.search {
+	position: relative;
 	width: 250px;
 	height: 35px;
+}
+.search input {
+	width: 100%;
+	height: inherit;
 	padding: 7px;
 	border: 1px #777 solid;
 	border-radius: 7px;
 	outline: 1px solid transparent;
-	outline-offset: 0;
+	outline-offset: 3px;
 	transition: 0.3s outline-offset ease-in;
 }
 .search input:focus {
-	outline: 1px solid red;
-	outline-offset: -4px;
+	outline: 2px solid red;
+	outline-offset: -1px;
+}
+.search .icon {
+	position: absolute;
+	top: 50%;
+	right: 7%;
+	transform: translate(50%, -50%);
+	transition: transform 0.3s ease-out;
+}
+.search input:focus + .icon {
+	opacity: 0.5;
+	transform: scale(0.9) translate(50%, -50%);
 }
