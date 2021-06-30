@@ -15,12 +15,25 @@
 	position: absolute;
 	right: 30px;
 	top: 0;
+	display: flex;
 }
 .delete {
 	margin-left: 20px;
 	color: red;
+	transition: color 0.3s ease;
+}
+.delete:hover {
+	color: lightcoral;
 }
 .back {
-	display: block;
+	width: fit-content;
 	margin-top: 40px;
+}
+.icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.icon svg {
+	margin-right: 5px;
 }

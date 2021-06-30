@@ -7,6 +7,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Layout from '@/components/Layout'
 import Modal from '@/components/Modal'
+import ImageUpload from '@/components/ImageUpload'
 import { API_URL } from '@/config/index'
 import styles from '@/styles/Form.module.css'
 import { FaArrowLeft, FaImage } from 'react-icons/fa'
@@ -59,12 +60,19 @@ export default function EditEventPage({ evt }) {
 		setValues({ ...values, [name]: value })
 	}
 
+	const imageUploaded = async e => {
+		const res = await fetch(`${API_URL}/events/${evt.id}`)
+		const data = await res.json()
+		setImagePreview(data.image.formats.thumbnail.url)
+		setShowModal(false)
+	}
+
 	return (
 		<Layout title='Edit Event | DJ Events'>
 			<Link href='/events'>
-				<a>
+				<a className='btn-icon'>
 					<FaArrowLeft />
-					Go Back
+					<span>Go Back</span>
 				</a>
 			</Link>
 			<h1>Edit Event</h1>
@@ -162,13 +170,16 @@ export default function EditEventPage({ evt }) {
 				</div>
 			)}
 			<div>
-				<button onClick={() => setShowModal(true)} className='btn-secondary'>
-					<FaImage /> Set Image
+				<button
+					onClick={() => setShowModal(true)}
+					className='btn-secondary btn-icon'
+				>
+					<FaImage /> <span> Set Image</span>
 				</button>
 			</div>
 
 			<Modal show={showModal} onClose={() => setShowModal(false)}>
-				IMAGE UPLOAD
+				<ImageUpload evtId={evt.id} imageUploaded={imageUploaded} />
 			</Modal>
 		</Layout>
 	)

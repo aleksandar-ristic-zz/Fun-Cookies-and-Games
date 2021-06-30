@@ -33,12 +33,16 @@ export default function EventPage({ evt }) {
 			<div className={styles.event}>
 				<div className={styles.controls}>
 					<Link href={`/events/edit/${evt.id}`}>
-						<a>
-							<FaPencilAlt /> Edit
+						<a className={styles.icon}>
+							<FaPencilAlt /> <span>Edit</span>
 						</a>
 					</Link>
-					<a href='#!' className={styles.delete} onClick={deleteEvent}>
-						<FaTimes /> Delete
+					<a
+						href='#!'
+						className={`${styles.delete} ${styles.icon}`}
+						onClick={deleteEvent}
+					>
+						<FaTimes /> <span>Delete</span>
 					</a>
 				</div>
 			</div>
@@ -62,8 +66,8 @@ export default function EventPage({ evt }) {
 			<p>{evt.address}</p>
 
 			<Link href='/events'>
-				<a className={styles.back}>
-					<FaArrowLeft /> Go Back
+				<a className={`${styles.back} ${styles.icon}`}>
+					<FaArrowLeft /> <span>Go Back</span>
 				</a>
 			</Link>
 		</Layout>
