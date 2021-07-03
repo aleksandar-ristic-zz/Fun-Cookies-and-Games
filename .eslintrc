@@ -1,0 +1,8 @@
+{
+	"settings": {
+		"import/resolver": {
+			"typescript": {}
+		}
+	},
+	"parser": "babel-eslint"
+}

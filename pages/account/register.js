@@ -1,16 +1,19 @@
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import Link from 'next/link'
 import Layout from '@/components/Layout'
 import styles from '@/styles/AuthForm.module.css'
 import { FaUser } from 'react-icons/fa'
+import AuthContext from '@/context/AuthContext'
 
 export default function LoginPage() {
 	const [username, setUsername] = useState('')
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const [passwordConfirm, setPasswordConfirm] = useState('')
+
+	const { error, register } = useContext(AuthContext)
 
 	const handleSubmit = e => {
 		e.preventDefault()
@@ -19,13 +22,16 @@ export default function LoginPage() {
 			toast.error('Passwords do not match!')
 			return
 		}
+
+		const user = { username, email, password }
+		register(user)
 	}
 
 	return (
 		<Layout title='User Login | DJ Events'>
 			<div className={styles.auth}>
 				<h1 className='btn-icon'>
-					<FaUser /> Log In
+					<FaUser /> Register
 				</h1>
 				<ToastContainer position='top-center' draggable />
 				<form onSubmit={handleSubmit}>
@@ -70,7 +76,7 @@ export default function LoginPage() {
 						type='submit'
 						value='Login'
 						className='btn'
-						disabled={password.length < 6}
+						disabled={passwordConfirm.length < 6}
 					/>
 
 					<p>
