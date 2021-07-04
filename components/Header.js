@@ -34,8 +34,9 @@ export default function Header() {
 							</li>
 							<li>
 								<Link href='/account/dashboard'>
-									<a className='btn-primary btn-icon'></a>
-									<FaTachometerAlt /> <span>Dashboard</span>
+									<a className='btn-primary btn-icon'>
+										<FaTachometerAlt /> <span>Dashboard</span>
+									</a>
 								</Link>
 							</li>
 							<li>
