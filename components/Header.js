@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import Link from 'next/link'
-import { FaSignInAlt, FaSignOutAlt, FaTachometerAlt } from 'react-icons/fa'
+import { FaSignInAlt, FaSignOutAlt } from 'react-icons/fa'
 import styles from '../styles/Header.module.css'
 import Search from '@/components/Search'
 import AuthContext from '@/context/AuthContext'
@@ -34,20 +34,18 @@ export default function Header() {
 							</li>
 							<li>
 								<Link href='/account/dashboard'>
-									<a className='btn-primary btn-icon'>
-										<FaTachometerAlt /> <span>Dashboard</span>
+									<a className='btn-secondary btn-icon'>
+									Dashboard
 									</a>
 								</Link>
 							</li>
 							<li>
-								<Link>
-									<button
-										className='btn-outline btn-icon'
-										onClick={() => logout()}
-									>
-										<FaSignOutAlt /> <span>Logout</span>
-									</button>
-								</Link>
+								<button
+									className='btn-outline btn-icon'
+									onClick={() => logout()}
+								>
+									<FaSignOutAlt /> <span>Logout</span>
+								</button>
 							</li>
 						</>
 					) : (
