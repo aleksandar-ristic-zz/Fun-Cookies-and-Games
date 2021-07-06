@@ -34,8 +34,8 @@ export default function Header() {
 							</li>
 							<li>
 								<Link href='/account/dashboard'>
-									<a className='btn-secondary btn-icon'>
-									Dashboard
+									<a id='dash' className='btn-secondary btn-icon'>
+										Dashboard
 									</a>
 								</Link>
 							</li>
