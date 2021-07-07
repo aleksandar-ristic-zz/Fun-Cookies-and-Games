@@ -1,6 +1,6 @@
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { useState, useContext } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import Link from 'next/link'
 import Layout from '@/components/Layout'
 import styles from '@/styles/AuthForm.module.css'
@@ -13,7 +13,9 @@ export default function LoginPage() {
 	const [password, setPassword] = useState('')
 	const [passwordConfirm, setPasswordConfirm] = useState('')
 
-	const { error, register } = useContext(AuthContext)
+	const { register, error } = useContext(AuthContext)
+
+	useEffect(() => error && toast.error(error), [error])
 
 	const handleSubmit = e => {
 		e.preventDefault()
@@ -74,7 +76,7 @@ export default function LoginPage() {
 
 					<input
 						type='submit'
-						value='Login'
+						value='Register'
 						className='btn'
 						disabled={passwordConfirm.length < 6}
 					/>
