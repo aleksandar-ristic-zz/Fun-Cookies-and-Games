@@ -1,3 +1,4 @@
+import { parseCookies } from '@/helpers/index'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Link from 'next/link'
@@ -8,10 +9,10 @@ import { API_URL } from '@/config/index'
 import styles from '@/styles/Event.module.css'
 import { useRouter } from 'next/router'
 
-export default function EventPage({ evt }) {
+export default function EventPage({ evt, userOwned }) {
 	const router = useRouter()
 
-	const deleteEvent = async e => {
+	const deleteEvent = async () => {
 		if (confirm('Are you sure?')) {
 			const res = await fetch(`${API_URL}/events/${evt.id}`, {
 				method: 'DELETE'
@@ -31,20 +32,30 @@ export default function EventPage({ evt }) {
 	return (
 		<Layout title='My Event | DJ Events'>
 			<div className={styles.event}>
-				<div className={styles.controls}>
-					<Link href={`/events/edit/${evt.id}`}>
-						<a className={styles.icon}>
-							<FaPencilAlt /> <span>Edit</span>
-						</a>
-					</Link>
-					<a
-						href='#!'
-						className={`${styles.delete} ${styles.icon}`}
-						onClick={deleteEvent}
-					>
-						<FaTimes /> <span>Delete</span>
+				<Link href='/events'>
+					<a className={`${styles.back} ${styles.icon}`}>
+						<FaArrowLeft /> <span>Go Back</span>
 					</a>
-				</div>
+				</Link>
+
+				{userOwned && (
+					<>
+						<div className={styles.controls}>
+							<Link href={`/events/edit/${evt.id}`}>
+								<a className={styles.icon}>
+									<FaPencilAlt /> <span>Edit</span>
+								</a>
+							</Link>
+							<a
+								href='#!'
+								className={`${styles.delete} ${styles.icon}`}
+								onClick={deleteEvent}
+							>
+								<FaTimes /> <span>Delete</span>
+							</a>
+						</div>
+					</>
+				)}
 			</div>
 			<span>
 				{new Date(evt.date).toLocaleDateString('en-GB')} at {evt.time}
@@ -64,23 +75,38 @@ export default function EventPage({ evt }) {
 			<p>{evt.description}</p>
 			<h3>Venue: {evt.venue}</h3>
 			<p>{evt.address}</p>
-
-			<Link href='/events'>
-				<a className={`${styles.back} ${styles.icon}`}>
-					<FaArrowLeft /> <span>Go Back</span>
-				</a>
-			</Link>
 		</Layout>
 	)
 }
 
-export async function getServerSideProps({ query: { slug } }) {
+export async function getServerSideProps({ query: { slug }, req }) {
+	const { token } = parseCookies(req)
+	let user = null
+	let userOwned = false
+
+	if (token) {
+		const lu = await fetch(`${API_URL}/events/me`, {
+			method: 'GET',
+			headers: {
+				Authorization: `Bearer ${token}`
+			}
+		})
+		user = await lu.json()
+	}
+
 	const res = await fetch(`${API_URL}/events?slug=${slug}`)
 	const events = await res.json()
 
+	if (user) {
+		if (user.filter(u => u.id === events[0].id).length === 1) {
+			userOwned = true
+		}
+	}
+
 	return {
 		props: {
-			evt: events[0]
+			evt: events[0],
+			userOwned
 		}
 	}
 }

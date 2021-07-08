@@ -77,7 +77,7 @@ export default function EditEventPage({ evt, token }) {
 
 	return (
 		<Layout title='Edit Event | DJ Events'>
-			<Link href='/events'>
+			<Link href='/account/dashboard'>
 				<a className='btn-icon'>
 					<FaArrowLeft />
 					<span>Go Back</span>
