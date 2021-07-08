@@ -1,4 +1,5 @@
 import { parseCookies } from '@/helpers/index'
+import Link from 'next/link'
 import Layout from '@/components/Layout'
 import DashboardEvent from '@/components/DashboardEvent'
 import { API_URL } from '@/config/index'
@@ -13,6 +14,12 @@ export default function DashboardPage({ events }) {
 		<Layout title='User Dashboard | DJ Events'>
 			<div className={styles.dash}>
 				<h1>Dashboard</h1>
+				<div className={styles.add}>
+					<Link href='/events/add'>
+						<a>+ Add Event</a>
+					</Link>
+				</div>
+
 				<h3>My Events</h3>
 
 				{events.map(evt => (

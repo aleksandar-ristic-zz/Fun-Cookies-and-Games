@@ -28,11 +28,6 @@ export default function Header() {
 					{user ? (
 						<>
 							<li>
-								<Link href='/events/add'>
-									<a>Add Event</a>
-								</Link>
-							</li>
-							<li>
 								<Link href='/account/dashboard'>
 									<a id='dash' className='btn-secondary btn-icon'>
 										Dashboard

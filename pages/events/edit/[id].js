@@ -1,4 +1,5 @@
 import moment from 'moment'
+import { parseCookies } from '@/helpers/index'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { useState } from 'react'
@@ -12,7 +13,7 @@ import { API_URL } from '@/config/index'
 import styles from '@/styles/Form.module.css'
 import { FaArrowLeft, FaImage } from 'react-icons/fa'
 
-export default function EditEventPage({ evt }) {
+export default function EditEventPage({ evt, token }) {
 	const [values, setValues] = useState({
 		name: evt.name,
 		performers: evt.performers,
@@ -36,17 +37,24 @@ export default function EditEventPage({ evt }) {
 
 		if (hasEmptyFields) {
 			toast.error('Please fill in all event fields')
+			return
 		}
 
 		const res = await fetch(`${API_URL}/events/${evt.id}`, {
 			method: 'PUT',
 			headers: {
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${token}`
 			},
 			body: JSON.stringify(values)
 		})
 
 		if (!res.ok) {
+			if (res.status === 403 || res.status === 401) {
+				toast.error('Please login first!')
+				return
+			}
+			console.log(res)
 			toast.error('Oh no! Something went wrong')
 		} else {
 			toast.success('Event updated successfully!')
@@ -186,12 +194,14 @@ export default function EditEventPage({ evt }) {
 }
 
 export async function getServerSideProps({ params: { id }, req }) {
+	const { token } = parseCookies(req)
 	const res = await fetch(`${API_URL}/events/${id}`)
 	const evt = await res.json()
 
 	return {
 		props: {
-			evt
+			evt,
+			token
 		}
 	}
 }
