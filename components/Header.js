@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { FaSignInAlt, FaSignOutAlt } from 'react-icons/fa'
 import styles from '../styles/Header.module.css'
 import Search from '@/components/Search'
@@ -12,7 +13,14 @@ export default function Header() {
 		<header className={styles.header}>
 			<div className={styles.logo}>
 				<Link href='/'>
-					<a>DJ Events</a>
+					<a>
+						<Image
+							src='/public/logo_gradient.png'
+							alt='logo'
+							width='173px'
+							height='78px'
+						/>
+					</a>
 				</Link>
 			</div>
 

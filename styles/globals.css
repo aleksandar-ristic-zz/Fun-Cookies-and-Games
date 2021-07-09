@@ -10,6 +10,8 @@ html,
 body {
 	font-family: 'Poppins', sans-serif;
 	line-height: 1.8;
+	color: #fff;
+	background-image: linear-gradient(-15deg, #47126b, #571089, #6d23b6);
 }
 
 a {
