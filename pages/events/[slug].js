@@ -9,13 +9,16 @@ import { API_URL } from '@/config/index'
 import styles from '@/styles/Event.module.css'
 import { useRouter } from 'next/router'
 
-export default function EventPage({ evt, userOwned }) {
+export default function EventPage({ evt, userOwned, token }) {
 	const router = useRouter()
 
 	const deleteEvent = async () => {
 		if (confirm('Are you sure?')) {
 			const res = await fetch(`${API_URL}/events/${evt.id}`, {
-				method: 'DELETE'
+				method: 'DELETE',
+				headers: {
+					Authorization: `Bearer ${token}`
+				}
 			})
 
 			const data = await res.json()
@@ -106,7 +109,8 @@ export async function getServerSideProps({ query: { slug }, req }) {
 	return {
 		props: {
 			evt: events[0],
-			userOwned
+			userOwned,
+			token
 		}
 	}
 }
