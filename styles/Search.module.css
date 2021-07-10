@@ -14,13 +14,14 @@
 	transition: 0.3s outline-offset ease-in;
 }
 .search input:focus {
-	outline: 2px solid red;
+	outline: 2px solid #ff0054;
 	outline-offset: -1px;
 }
 .search .icon {
 	position: absolute;
 	top: 50%;
 	right: 7%;
+	color: #ff0054;
 	transform: translate(50%, -50%);
 	transition: transform 0.3s ease-out;
 }

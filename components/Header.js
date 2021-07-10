@@ -15,10 +15,10 @@ export default function Header() {
 				<Link href='/'>
 					<a>
 						<Image
-							src='/public/logo_gradient.png'
+							src='/logo_gradient.svg'
 							alt='logo'
-							width='173px'
-							height='78px'
+							width='150'
+							height='60px'
 						/>
 					</a>
 				</Link>
@@ -37,14 +37,14 @@ export default function Header() {
 						<>
 							<li>
 								<Link href='/account/dashboard'>
-									<a id='dash' className='btn-secondary btn-icon'>
+									<a id='dash' className='btn btn-outline btn-icon'>
 										Dashboard
 									</a>
 								</Link>
 							</li>
 							<li>
 								<button
-									className='btn-outline btn-icon'
+									className='btn btn-secondary btn-icon'
 									onClick={() => logout()}
 								>
 									<FaSignOutAlt /> <span>Logout</span>
@@ -55,7 +55,7 @@ export default function Header() {
 						<>
 							<li>
 								<Link href='/account/login'>
-									<a className='btn-outline btn-icon'>
+									<a className='btn btn-outline btn-icon'>
 										<FaSignInAlt /> <span>Login</span>
 									</a>
 								</Link>

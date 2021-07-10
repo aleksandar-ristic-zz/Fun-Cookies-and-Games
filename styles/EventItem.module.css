@@ -1,7 +1,8 @@
 .event {
+	position: relative;
 	margin: 20px 0;
 	padding: 13px;
-	box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.1);
+	box-shadow: 2px 3px 5px rgba(255, 255, 255, 0.1);
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -12,6 +13,33 @@
 }
 .info {
 	flex: 2;
+}
+.details {
+	position: absolute;
+	top: 0;
+	left: 0;
+	min-width: 15rem;
+	height: 100%;
+	padding-left: 1rem;
+	border-radius: 0.35rem 5rem 0 0.35rem;
+	background-image: linear-gradient(135deg, #ff0054, #ffea00);
+	transform: rotateZ(-15deg);
+	transform-origin: left;
+	opacity: 0;
+	transition: all 0.5s ease-in;
+}
+.event:hover .details {
+	transform: rotateZ(0);
+	opacity: 0.9;
+}
+.event:hover .details:hover {
+	transform: translateX(100%);
+}
+.details ul {
+	list-style: none;
+	height: inherit;
+	display: flex;
+	flex-direction: column-reverse;
 }
 
 @media (max-width: 600px) {

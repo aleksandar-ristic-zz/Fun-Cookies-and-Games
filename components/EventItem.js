@@ -22,10 +22,19 @@ export default function EventItem({ evt }) {
 				</span>
 				<h3>{evt.name}</h3>
 			</div>
-			<div className={styles.link}>
+			<div>
 				<Link href={`/events/${evt.slug}`}>
-					<a className='btn'>Details</a>
+					<a className='btn btn-outline'>Read More</a>
 				</Link>
+			</div>
+			<div className={styles.details}>
+				<ul>
+					{evt.performers.split(',').map(performer => (
+						<li>
+							<span>{performer}</span>
+						</li>
+					))}
+				</ul>
 			</div>
 		</div>
 	)
