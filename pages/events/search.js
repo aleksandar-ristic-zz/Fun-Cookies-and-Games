@@ -11,7 +11,7 @@ export default function SearchPage({ events }) {
 	return (
 		<Layout title='Search Results'>
 			<Link href='/events'>
-				<a>
+				<a className='btn-icon'>
 					<FaArrowLeft /> Go Back
 				</a>
 			</Link>

@@ -1,6 +1,6 @@
 .event {
 	position: relative;
-	margin: 20px 0;
+	margin: 1.25rem 0;
 	padding: 13px;
 	box-shadow: 2px 3px 5px rgba(255, 255, 255, 0.1);
 	display: flex;
@@ -32,7 +32,8 @@
 	transform: rotateZ(0);
 	opacity: 0.9;
 }
-.event:hover .details:hover {
+.event:hover .details:hover,
+.event:hover .img:hover + .details {
 	transform: translateX(100%);
 }
 .details ul {

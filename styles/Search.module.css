@@ -7,10 +7,12 @@
 	width: 100%;
 	height: inherit;
 	padding: 7px;
-	border: 1px #777 solid;
+	border: 1px rgba(225, 225, 225, 0.4) solid;
 	border-radius: 7px;
+	background-color: transparent;
 	outline: 1px solid transparent;
 	outline-offset: 3px;
+	color: aliceblue;
 	transition: 0.3s outline-offset ease-in;
 }
 .search input:focus {

@@ -53,6 +53,11 @@ h3 span {
 .btn-primary:hover {
 	background-position: center;
 }
+.btn-primary:disabled {
+	background: linear-gradient(135deg, #ff4d87, #fff04e, #ff4d87, #fff04e);
+	background-size: 200%;
+	background-position: right;
+}
 .btn-secondary {
 	background: linear-gradient(135deg, #ff0054, #ff0054, #ffea00);
 	background-size: 200%;

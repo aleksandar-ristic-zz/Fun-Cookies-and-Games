@@ -51,7 +51,7 @@ export default function LoginPage() {
 					<input
 						type='submit'
 						value='Login'
-						className='btn'
+						className='btn btn-primary'
 						disabled={password.length < 6}
 					/>
 

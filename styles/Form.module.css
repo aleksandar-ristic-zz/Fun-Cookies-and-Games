@@ -1,11 +1,13 @@
 .form label {
 	display: block;
+	color: aliceblue;
 }
 .form textarea,
 .form input {
 	width: 100%;
 	padding: 7px;
-	border: 1px #777 solid;
+	color: aliceblue;
+	border: 1px #ff4d87 solid;
 	border-radius: 7px;
 }
 .form input {
@@ -22,8 +24,8 @@
 	font-weight: 600;
 }
 .form .file {
-	border: 1px solid #ccc;
-	background-color: #f4f4f4;
+	border: 1px solid #ff4d87;
+	background-color: #ff80a9;
 	padding: 10px;
 }
 .grid {

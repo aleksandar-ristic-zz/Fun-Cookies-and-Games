@@ -16,6 +16,15 @@ export default function EventItem({ evt }) {
 					height={100}
 				/>
 			</div>
+			<div className={styles.details}>
+				<ul>
+					{evt.performers.split(',').map(performer => (
+						<li>
+							<span>{performer}</span>
+						</li>
+					))}
+				</ul>
+			</div>
 			<div className={styles.info}>
 				<span>
 					{new Date(evt.date).toLocaleDateString('en-GB')} at {evt.time}
@@ -26,15 +35,6 @@ export default function EventItem({ evt }) {
 				<Link href={`/events/${evt.slug}`}>
 					<a className='btn btn-outline'>Read More</a>
 				</Link>
-			</div>
-			<div className={styles.details}>
-				<ul>
-					{evt.performers.split(',').map(performer => (
-						<li>
-							<span>{performer}</span>
-						</li>
-					))}
-				</ul>
 			</div>
 		</div>
 	)

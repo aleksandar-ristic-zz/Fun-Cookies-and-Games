@@ -77,7 +77,7 @@ export default function LoginPage() {
 					<input
 						type='submit'
 						value='Register'
-						className='btn'
+						className='btn btn-primary'
 						disabled={passwordConfirm.length < 6}
 					/>
 
