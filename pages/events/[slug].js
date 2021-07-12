@@ -33,7 +33,7 @@ export default function EventPage({ evt, userOwned, token }) {
 	}
 
 	return (
-		<Layout title='My Event | DJ Events'>
+		<Layout title='My Event | FCG'>
 			<div className={styles.event}>
 				<Link href='/events'>
 					<a className={`${styles.back} ${styles.icon}`}>

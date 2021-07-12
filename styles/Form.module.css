@@ -7,6 +7,7 @@
 	width: 100%;
 	padding: 7px;
 	color: aliceblue;
+	background-color: transparent;
 	border: 1px #ff4d87 solid;
 	border-radius: 7px;
 }

@@ -30,7 +30,7 @@ export default function AddEventPage({ token }) {
 			toast.error('Please fill in all event fields')
 			return
 		}
-		console.log(values)
+
 		const res = await fetch(`${API_URL}/events`, {
 			method: 'POST',
 			headers: {
@@ -60,7 +60,7 @@ export default function AddEventPage({ token }) {
 	}
 
 	return (
-		<Layout title='Add Event | DJ Events'>
+		<Layout title='Add Fun | Fun, Cookies and Games'>
 			<Link href='/events'>
 				<a>
 					<FaArrowLeft />
@@ -151,7 +151,7 @@ export default function AddEventPage({ token }) {
 					></textarea>
 				</div>
 
-				<input type='submit' value='Add Event' className='btn' />
+				<input type='submit' value='Add Event' className='btn btn-primary' />
 			</form>
 		</Layout>
 	)

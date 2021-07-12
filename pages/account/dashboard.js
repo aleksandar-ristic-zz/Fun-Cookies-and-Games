@@ -32,7 +32,7 @@ export default function DashboardPage({ events, token }) {
 	}
 
 	return (
-		<Layout title='User Dashboard | DJ Events'>
+		<Layout title='User Dashboard | Fun, Cookies and Games'>
 			<div className={styles.dash}>
 				<h1>Dashboard</h1>
 
@@ -40,11 +40,11 @@ export default function DashboardPage({ events, token }) {
 
 				<div className={styles.add}>
 					<Link href='/events/add'>
-						<a>+ Add Event</a>
+						<a className='btn btn-secondary'>+ Add Activity</a>
 					</Link>
 				</div>
 
-				<h3>My Events</h3>
+				<h3>My Fun</h3>
 
 				{events.map(evt => (
 					<DashboardEvent key={evt.id} evt={evt} handleDelete={deleteEvent} />

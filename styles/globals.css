@@ -85,7 +85,7 @@ h3 span {
 	bottom: 0;
 	right: 0;
 	background-color: #571089;
-	border-radius: 0.35rem;
+	border-radius: 0.4rem;
 	z-index: -1;
 }
 .btn-outline::before {
