@@ -60,13 +60,14 @@ export default function AddEventPage({ token }) {
 	}
 
 	return (
-		<Layout title='Add Fun | Fun, Cookies and Games'>
+		<Layout title='Add Activity | fun, cookies and games'>
 			<Link href='/events'>
 				<a>
 					<FaArrowLeft />
 					Go Back
 				</a>
 			</Link>
+
 			<h1>Add Event</h1>
 
 			<ToastContainer position='top-center' draggable />
