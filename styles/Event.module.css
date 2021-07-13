@@ -1,6 +1,4 @@
-.event {
-	position: relative;
-	padding-top: 40px;
+.container {
 }
 .event h3 {
 	font-size: 25px;
@@ -13,7 +11,7 @@
 }
 .controls {
 	position: absolute;
-	right: 30px;
+	right: 1.8875rem;
 	top: 0;
 	display: flex;
 }

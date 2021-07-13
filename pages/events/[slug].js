@@ -33,51 +33,108 @@ export default function EventPage({ evt, userOwned, token }) {
 	}
 
 	return (
-		<Layout title='My Event | FCG'>
-			<div className={styles.event}>
-				<Link href='/events'>
-					<a className={`${styles.back} ${styles.icon}`}>
-						<FaArrowLeft /> <span>Go Back</span>
-					</a>
-				</Link>
+		<Layout title='My Fun | Fun, Cookies, Games'>
+			<div className={styles.container}>
+				<div className={styles.added}>
+					<Link href='/events'>
+						<a className={`${styles.back} ${styles.icon}`}>
+							<FaArrowLeft /> <span>Go Back</span>
+						</a>
+					</Link>
 
-				{userOwned && (
-					<>
-						<div className={styles.controls}>
-							<Link href={`/events/edit/${evt.id}`}>
-								<a className={styles.icon}>
-									<FaPencilAlt /> <span>Edit</span>
+					{userOwned && (
+						<>
+							<div className={styles.controls}>
+								<Link href={`/events/edit/${evt.id}`}>
+									<a className={styles.icon}>
+										<FaPencilAlt /> <span>Edit</span>
+									</a>
+								</Link>
+								<a
+									href='#!'
+									className={`${styles.delete} ${styles.icon}`}
+									onClick={deleteEvent}
+								>
+									<FaTimes /> <span>Delete</span>
 								</a>
-							</Link>
-							<a
-								href='#!'
-								className={`${styles.delete} ${styles.icon}`}
-								onClick={deleteEvent}
-							>
-								<FaTimes /> <span>Delete</span>
-							</a>
-						</div>
-					</>
-				)}
+							</div>
+						</>
+					)}
+				</div>
 			</div>
-			<span>
-				{new Date(evt.date).toLocaleDateString('en-GB')} at {evt.time}
-			</span>
-			<h1>{evt.name}</h1>
-
 			<ToastContainer position='top-center' draggable />
 
-			{evt.image && (
-				<div className={styles.image}>
-					<Image src={evt.image.formats.medium.url} width={960} height={600} />
+			<div className={styles.cardContainer}>
+				<div className={styles.cardDetails}>
+					<span className={styles.date}>
+						{new Date(evt.date).toLocaleDateString('en-GB')}
+					</span>
+					<h1>{evt.name}</h1>
+					<div className={styles.infoWrapper}>
+						<div className={styles.venue}>{evt.venue}</div>
+						<div className={styles.address}>{evt.address}</div>
+						<div className={styles.time}>{evt.time}</div>
+					</div>
+					<p className={styles.desc}>{evt.description}</p>
+					<div className={styles.infoWrapper}>
+						{evt.performers.split(',').map(per => (
+							<div className={styles.per}>{per}</div>
+						))}
+					</div>
 				</div>
-			)}
-			<h3>Performers:</h3>
-			<p>{evt.performers}</p>
-			<h3>Description:</h3>
-			<p>{evt.description}</p>
-			<h3>Venue: {evt.venue}</h3>
-			<p>{evt.address}</p>
+
+				{evt.image && (
+					<div className={styles.card - img}>
+						<Image
+							src={evt.image.formats.medium.url}
+							width={960}
+							height={600}
+						/>
+					</div>
+				)}
+			</div>
+			<div className={styles.reviewContainer}>
+				<h3>User Reviews</h3>
+				<div className={styles.inputContainer}>
+					<textarea placeholder='What do you think?'></textarea>
+					<div className={styles.row}>
+						<div className={styles.opinion}>
+							<h4>Are you going to this party?</h4>
+							<span>On My Way!</span>
+							<span>If I can make it.</span>
+							<span>It's not for me!</span>
+						</div>
+						<button className={style.btn.btn - primary}>Submit</button>
+					</div>
+				</div>
+			</div>
+			{reviews.map(review => (
+				<div key={review.id} className={styles.review}>
+					{userOwned && (
+						<>
+							<div className={styles.controls}>
+								<Link href={`/events/edit/${evt.id}`}>
+									<a className={styles.icon}>
+										<FaPencilAlt /> <span>Edit</span>
+									</a>
+								</Link>
+								<a
+									href='#!'
+									className={`${styles.delete} ${styles.icon}`}
+									onClick={deleteEvent}
+								>
+									<FaTimes /> <span>Delete</span>
+								</a>
+							</div>
+						</>
+					)}
+					<div className={styles.opinion}>{review.description}</div>
+					<div className={styles.name}>
+						{review.name} at{' '}
+						<span>{newDate(review.date).toLocaleDateString('en-GB')}</span>
+					</div>
+				</div>
+			))}
 		</Layout>
 	)
 }
