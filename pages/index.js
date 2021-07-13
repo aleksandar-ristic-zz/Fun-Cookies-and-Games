@@ -6,7 +6,8 @@ import { API_URL } from '@/config/index'
 export default function HomePage({ events }) {
 	return (
 		<Layout>
-			<h1>Upcoming Events</h1>
+			<h2>Upcoming Fun</h2>
+			<p>Stuff to do in your neighborhood.</p>
 			{events.length === 0 && <h3>No events at the moment.</h3>}
 
 			{events.map(evt => (
@@ -15,7 +16,7 @@ export default function HomePage({ events }) {
 
 			{events.length > 0 && (
 				<Link href='/events'>
-					<a className='btn-secondary'>View All Events</a>
+					<a className='btn btn-secondary'>View All</a>
 				</Link>
 			)}
 		</Layout>

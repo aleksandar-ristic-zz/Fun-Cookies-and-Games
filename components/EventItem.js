@@ -19,7 +19,7 @@ export default function EventItem({ evt }) {
 			<div className={styles.details}>
 				<ul>
 					{evt.performers.split(',').map(performer => (
-						<li>
+						<li key={performer}>
 							<span>{performer}</span>
 						</li>
 					))}

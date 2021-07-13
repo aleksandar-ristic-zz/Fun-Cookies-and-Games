@@ -6,8 +6,8 @@ import Pagination from '@/components/Pagination'
 export default function EventsPage({ events, page, total }) {
 	return (
 		<Layout>
-			<h1>Events</h1>
-			{events.length === 0 && <h3>No events at the moment.</h3>}
+			<h1>Fun Stuff</h1>
+			{events.length === 0 && <h3>No activities at the moment.</h3>}
 
 			{events.map(evt => (
 				<EventItem key={evt.id} evt={evt} />
