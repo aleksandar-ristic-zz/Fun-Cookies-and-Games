@@ -1,18 +1,22 @@
+import { useState } from 'react'
+import { useRouter } from 'next/router'
 import { parseCookies } from '@/helpers/index'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Link from 'next/link'
-import Image from 'next/image'
-import { FaPencilAlt, FaTimes, FaArrowLeft } from 'react-icons/fa'
+import { FaPencilAlt, FaTimes, FaArrowLeft, FaUserAlt } from 'react-icons/fa'
 import Layout from '@/components/Layout'
 import { API_URL } from '@/config/index'
 import styles from '@/styles/Event.module.css'
-import { useRouter } from 'next/router'
 
-export default function EventPage({ evt, userOwned, token }) {
-	console.log(evt.reviews[0])
+export default function EventPage({ evt, usersActivity, userId, token, name }) {
+	console.log(userId)
+	const [desc, setDesc] = useState('')
+	const [attendance, setAttendance] = useState('maybe')
+
 	const router = useRouter()
 
+	//* Activity func
 	const deleteEvent = async () => {
 		if (confirm('Are you sure?')) {
 			const res = await fetch(`${API_URL}/events/${evt.id}`, {
@@ -33,6 +37,37 @@ export default function EventPage({ evt, userOwned, token }) {
 		}
 	}
 
+	//* Opinion func
+	const createReview = async () => {
+		const values = {
+			desc,
+			attendance,
+			name
+		}
+
+		const res = await fetch(`${API_URL}/reviews`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${token}`
+			},
+			body: JSON.stringify(values)
+		})
+
+		if (!res.ok) {
+			if (res.status === 403 || res.status === 401) {
+				toast.error(' Please login first.')
+				return
+			}
+
+			toast.error('Oh no! Something went wrong')
+		} else {
+			toast.success('Review added successfully!')
+			await res.json()
+			router.reload()
+		}
+	}
+
 	return (
 		<Layout title='Activity | Fun, Cookies, Games'>
 			<div className={styles.container}>
@@ -43,7 +78,7 @@ export default function EventPage({ evt, userOwned, token }) {
 						</a>
 					</Link>
 
-					{userOwned && (
+					{usersActivity && (
 						<>
 							<div className={styles.controls}>
 								<Link href={`/events/edit/${evt.id}`}>
@@ -62,7 +97,9 @@ export default function EventPage({ evt, userOwned, token }) {
 						</>
 					)}
 				</div>
+
 				<ToastContainer position='top-center' draggable />
+
 				<div className={styles.card}>
 					<div className={styles.cardDetails}>
 						<span className={styles.date}>
@@ -77,7 +114,9 @@ export default function EventPage({ evt, userOwned, token }) {
 						<p className={styles.desc}>{evt.description}</p>
 						<div className={styles.infoWrapper}>
 							{evt.performers.split(',').map(per => (
-								<div className={styles.per}>{per}</div>
+								<div key={per} className={styles.per}>
+									{per}
+								</div>
 							))}
 						</div>
 					</div>
@@ -90,53 +129,96 @@ export default function EventPage({ evt, userOwned, token }) {
 				</div>
 				<div className={styles.reviewContainer}>
 					<h3>User Reviews</h3>
-					<div className={styles.inputContainer}>
-						<textarea placeholder='What do you think?'></textarea>
-						<div className={styles.row}>
-							<div className={styles.opinion}>
-								<h4>Are you going to this party?</h4>
-								<span>On My Way!</span>
-								<span>If I can make it.</span>
-								<span>It's not for me!</span>
-							</div>
-							<button className='btn btn-primary'>Submit</button>
-						</div>
-					</div>
-				</div>
-				<div className={styles.reviewWrapper}>
-					{evt.reviews.length === 0 ? (
-						<h3>No reviews yet.</h3>
+					{!token ? (
+						<p>
+							<Link href='/account/login'>
+								<a className={`${styles.back} ${styles.icon}`}>
+									<FaUserAlt /> <span>Login</span>
+								</a>
+							</Link>{' '}
+							first in order to leave comments.
+						</p>
 					) : (
-						evt.reviews.map(review => (
-							<div key={review.id} className={styles.review}>
-								{userOwned && (
-									<>
-										<div className={styles.controls}>
-											<Link href={`/events/edit/${evt.id}`}>
-												<a className={styles.icon}>
-													<FaPencilAlt /> <span>Edit</span>
-												</a>
-											</Link>
-											<a
-												href='#!'
-												className={`${styles.delete} ${styles.icon}`}
-												onClick={deleteEvent}
-											>
-												<FaTimes /> <span>Delete</span>
-											</a>
-										</div>
-									</>
-								)}
-								<div className={styles.opinion}>"{review.description}"</div>
-								<div className={styles.name}>
-									{review.name} at{' '}
-									<span>
-										{new Date(review.created_at).toLocaleDateString('en-GB')}
-									</span>
+						<div className={styles.inputContainer}>
+							<textarea
+								placeholder='What do you think?'
+								value={desc}
+								onChange={e => setDesc(e.target.value)}
+							></textarea>
+							<div className={styles.row}>
+								<div className={styles.opinion}>
+									<h4>Are you going to this party?</h4>
+									<label htmlFor='going'>
+										On My Way!
+										<input
+											type='radio'
+											name='attendance'
+											id='going'
+											value='going'
+											onChange={e => setAttendance(e.target.value)}
+										/>
+									</label>
+									<label htmlFor='maybe'>
+										If I can make it.
+										<input
+											type='radio'
+											name='attendance'
+											id='maybe'
+											value='maybe'
+											checked={true === 'maybe'}
+											onChange={e => setAttendance(e.target.value)}
+										/>
+									</label>
+									<label htmlFor='no'>
+										It's not for me!
+										<input
+											type='radio'
+											name='attendance'
+											id='no'
+											onChange={e => setAttendance(e.target.value)}
+										/>
+									</label>
 								</div>
+								<button className='btn btn-primary'>Submit</button>
 							</div>
-						))
+						</div>
 					)}
+
+					<div className={styles.reviewWrapper}>
+						{evt.reviews.length === 0 ? (
+							<h3>No reviews yet.</h3>
+						) : (
+							evt.reviews.map(review => (
+								<div key={review.id} className={styles.review}>
+									{userId === review.id && (
+										<>
+											<div className={styles.controls}>
+												<Link href={`/events/edit/${evt.id}`}>
+													<a className={styles.icon}>
+														<FaPencilAlt /> <span>Edit</span>
+													</a>
+												</Link>
+												<a
+													href='#!'
+													className={`${styles.delete} ${styles.icon}`}
+													onClick={deleteEvent}
+												>
+													<FaTimes /> <span>Delete</span>
+												</a>
+											</div>
+										</>
+									)}
+									<div className={styles.opinion}>"{review.description}"</div>
+									<div className={styles.name}>
+										{review.name} at{' '}
+										<span>
+											{new Date(review.created_at).toLocaleDateString('en-GB')}
+										</span>
+									</div>
+								</div>
+							))
+						)}
+					</div>
 				</div>
 			</div>
 		</Layout>
@@ -146,7 +228,8 @@ export default function EventPage({ evt, userOwned, token }) {
 export async function getServerSideProps({ query: { slug }, req }) {
 	const { token } = parseCookies(req)
 	let user = null
-	let userOwned = false
+	let name = null
+	let usersActivity = false
 
 	if (token) {
 		const lu = await fetch(`${API_URL}/events/me`, {
@@ -162,15 +245,18 @@ export async function getServerSideProps({ query: { slug }, req }) {
 	const events = await res.json()
 
 	if (user) {
-		if (user.filter(u => u.id === events[0].id).length === 1) {
-			userOwned = true
+		name = user[0].user.username
+		if (user.filter(u => u.id === events[0].user.id).filter === 1) {
+			usersActivity = true
 		}
 	}
 
 	return {
 		props: {
 			evt: events[0],
-			userOwned,
+			usersActivity,
+			name,
+			userId: user[0].user.id,
 			token
 		}
 	}

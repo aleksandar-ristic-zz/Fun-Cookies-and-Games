@@ -115,6 +115,7 @@
 	padding: 3rem 5rem 1rem;
 }
 .reviewContainer h3 {
+	font-size: 1.875rem;
 	text-align: left;
 }
 .inputContainer {
@@ -154,39 +155,44 @@
 	margin: 5rem 0;
 }
 .opinion h4 {
+	margin-bottom: 0.5rem;
 	color: #ff80a9;
 	font-size: 1.5rem;
 	font-weight: 600;
 }
-.opinion span {
+.opinion input {
+	width: 0;
+	height: 0;
+	opacity: 0;
+}
+.opinion label {
 	display: inline-block;
 	height: 2.5rem;
 	padding: 0 1.25rem;
 	font-size: 1.25rem;
-	line-height: 2.75rem;
+	line-height: 2.5rem;
 	cursor: crosshair;
 	background-color: #ff4d87;
 	transition: all 0.3s ease;
 }
-.opinion span:hover {
-	background-color: #ff80a9;
-}
-.opinion span:active,
-.opinion span:focus,
-.opinion span.clicked {
-	background-color: #ff0054;
-}
-.opinion span:first-of-type {
+.opinion label:first-of-type {
 	border-top-left-radius: 0.5rem;
 	border-bottom-left-radius: 0.5rem;
 }
-.opinion span:nth-of-type(2) {
-	border-right: 1px solid #ffea00;
-	border-left: 1px solid #ffea00;
+.opinion label:nth-of-type(2) {
+	border-right: 2px solid #6d23b6;
+	border-left: 2px solid #6d23b6;
 }
-.opinion span:last-of-type {
+.opinion label:last-of-type {
 	border-top-right-radius: 0.35rem;
 	border-bottom-right-radius: 0.35rem;
+}
+.opinion label:hover {
+	background-color: #ff80a9;
+}
+.opinion label:focus-within {
+	color: aliceblue;
+	background: #ff0054;
 }
 .btn {
 	margin-top: 2.5rem;
