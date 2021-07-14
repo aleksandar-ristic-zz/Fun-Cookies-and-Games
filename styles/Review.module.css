@@ -1,0 +1,164 @@
+.reviewContainer {
+	width: 100%;
+	padding: 3rem 5rem 1rem;
+}
+.reviewContainer h3 {
+	font-size: 1.875rem;
+	text-align: left;
+}
+.inputContainer {
+	position: relative;
+	width: inherit;
+	padding: 2rem 0;
+	display: flex;
+	flex-direction: column;
+}
+.inputContainer::before {
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 3px;
+	bottom: 0;
+	left: 0;
+	background-image: linear-gradient(135deg, #ff0054, #ffea00, #ff0054, #ffea00);
+}
+.inputContainer textarea {
+	min-width: 20rem;
+	max-width: 50vw;
+	height: 10rem;
+	padding: 0.5rem;
+	color: aliceblue;
+	font-size: 1.25rem;
+	border: 1px solid #ff4d87;
+	border-radius: 0.5rem;
+	background: transparent;
+	resize: none;
+}
+.inputContainer .row {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+.opinion {
+	margin: 5rem 0;
+}
+.opinion h4 {
+	margin-bottom: 0.5rem;
+	color: #ff80a9;
+	font-size: 1.5rem;
+	font-weight: 600;
+}
+.opinion input {
+	width: 0;
+	height: 0;
+	opacity: 0;
+}
+.opinion label {
+	display: inline-block;
+	height: 2rem;
+	padding: 0 1.2rem;
+	font-size: 1rem;
+	line-height: 2rem;
+	cursor: crosshair;
+	background-color: #ff4d87;
+	transition: all 0.3s ease;
+}
+.opinion label:first-of-type {
+	border-top-left-radius: 0.5rem;
+	border-bottom-left-radius: 0.5rem;
+}
+.opinion label:nth-of-type(2) {
+	border-right: 2px solid #6d23b6;
+	border-left: 2px solid #6d23b6;
+}
+.opinion label:last-of-type {
+	border-top-right-radius: 0.35rem;
+	border-bottom-right-radius: 0.35rem;
+}
+.opinion label:hover {
+	background-color: #ff80a9;
+}
+.opinion label:focus-within {
+	color: aliceblue;
+	background: #ff0054;
+}
+.btn {
+	margin-top: 2.5rem;
+	margin-bottom: 5rem;
+	text-transform: uppercase;
+}
+.reviewWrapper {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+.reviewWrapper .review:first-of-type::before {
+	background-image: none;
+}
+.reviewWrapper h3 {
+	margin-top: 3rem;
+}
+.review {
+	position: relative;
+	width: max-content;
+	max-width: 50vw;
+	color: aliceblue;
+}
+.review .opinion {
+	margin-bottom: 1rem;
+	font-size: 1.6rem;
+	line-height: 1.4;
+}
+.review::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 2px;
+	background-image: linear-gradient(135deg, #ff0054, #ffea00, #ff0054, #ffea00);
+}
+.review .name {
+	text-align: right;
+	font-size: 1.125rem;
+}
+.review .controls {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	text-align: right;
+}
+.review .controls span:first-child {
+	display: inline-block;
+	margin-right: 0.35rem;
+}
+.controls {
+	position: absolute;
+	right: 0;
+	bottom: 0.35rem;
+	display: flex;
+}
+.delete {
+	margin-left: 20px;
+	color: red;
+	transition: color 0.3s ease;
+}
+.delete:hover {
+	color: lightcoral;
+}
+.back {
+	width: fit-content;
+	margin-top: 40px;
+}
+.icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.icon svg {
+	margin-right: 5px;
+}
+.edit {
+	color: #ffea00;
+}

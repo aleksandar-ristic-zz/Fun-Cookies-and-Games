@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 export default function NotFoundPage() {
 	return (
-		<Layout title='Page Not Found'>
+		<Layout title=' 404 Page Not Found'>
 			<div className={styles.error}>
 				<h1>
 					<FaExclamationTriangle /> 404

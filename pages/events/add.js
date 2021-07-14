@@ -62,7 +62,7 @@ export default function AddEventPage({ token }) {
 	return (
 		<Layout title='Add Activity | fun, cookies and games'>
 			<Link href='/events'>
-				<a>
+				<a className='btn-icon'>
 					<FaArrowLeft />
 					Go Back
 				</a>

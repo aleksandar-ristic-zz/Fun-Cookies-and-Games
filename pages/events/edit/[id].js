@@ -54,7 +54,7 @@ export default function EditEventPage({ evt, token }) {
 				toast.error('Please login first!')
 				return
 			}
-			console.log(res)
+
 			toast.error('Oh no! Something went wrong')
 		} else {
 			toast.success('Event updated successfully!')
@@ -68,7 +68,7 @@ export default function EditEventPage({ evt, token }) {
 		setValues({ ...values, [name]: value })
 	}
 
-	const imageUploaded = async e => {
+	const imageUploaded = async () => {
 		const res = await fetch(`${API_URL}/events/${evt.id}`)
 		const data = await res.json()
 		setImagePreview(data.image.formats.thumbnail.url)
@@ -76,7 +76,7 @@ export default function EditEventPage({ evt, token }) {
 	}
 
 	return (
-		<Layout title='Edit Event | DJ Events'>
+		<Layout title='Edit Activity | fun, cookies and games'>
 			<Link href='/account/dashboard'>
 				<a className='btn-icon'>
 					<FaArrowLeft />
@@ -167,7 +167,7 @@ export default function EditEventPage({ evt, token }) {
 					></textarea>
 				</div>
 
-				<input type='submit' value='Edit Event' className='btn' />
+				<input type='submit' value='Edit Event' className='btn btn-primary' />
 			</form>
 			<h2>Event Image</h2>
 			{imagePreview ? (
@@ -180,7 +180,7 @@ export default function EditEventPage({ evt, token }) {
 			<div>
 				<button
 					onClick={() => setShowModal(true)}
-					className='btn-secondary btn-icon'
+					className='btn btn-secondary btn-icon'
 				>
 					<FaImage /> <span> Set Image</span>
 				</button>

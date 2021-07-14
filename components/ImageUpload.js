@@ -37,7 +37,7 @@ export default function ImageUpload({ evtId, imageUploaded, token }) {
 				<div className={styles.file}>
 					<input type='file' onChange={handleFileChange} />
 				</div>
-				<input type='submit' value='Upload' className='btn' />
+				<input type='submit' value='Upload' className='btn btn-primary' />
 			</form>
 		</div>
 	)
