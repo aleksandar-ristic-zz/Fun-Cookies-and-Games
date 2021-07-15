@@ -24,12 +24,11 @@
 .cardDetails p {
 	max-width: 35rem;
 	margin: 3rem 0;
-	font-size: 1.25rem;
+	font-size: 1.125rem;
 	font-weight: 300;
 	line-height: 1.4;
 }
 .date {
-	font-size: 1.5rem;
 	letter-spacing: 2px;
 }
 .infoWrapper {
@@ -39,11 +38,10 @@
 }
 .infoWrapper > * {
 	position: relative;
-	height: 2.5rem;
+	height: 2rem;
 	margin: 0.35rem;
-	padding: 0 1.25rem;
-	line-height: 2.5rem;
-	font-size: 1.5rem;
+	padding: 0 0.75rem;
+	line-height: 2rem;
 	border: 1px solid aliceblue;
 	border-radius: 1rem;
 	transition: transform 0.3s ease;
@@ -65,7 +63,7 @@
 	opacity: 0;
 }
 .infoWrapper > *:hover::before {
-	bottom: -2rem;
+	bottom: -1.8rem;
 	transform: translateX(-50%) rotateX(-70deg);
 	opacity: 0.2;
 }

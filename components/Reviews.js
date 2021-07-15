@@ -9,8 +9,8 @@ import styles from '@/styles/Review.module.css'
 import UpdateReview from './UpdateReview'
 import Modal from './Modal'
 
-export default function Reviews({ userId, name, reviews, token }) {
-	const [desc, setDesc] = useState('')
+export default function Reviews({ eventId, userId, name, reviews, token }) {
+	const [description, setDescription] = useState('')
 	const [attendance, setAttendance] = useState('maybe')
 	const [showModal, setShowModal] = useState(false)
 	const [upReview, setUpReview] = useState('')
@@ -19,9 +19,11 @@ export default function Reviews({ userId, name, reviews, token }) {
 
 	const createReview = async () => {
 		const values = {
-			desc,
+			description,
 			attendance,
-			name
+			name,
+			user: userId,
+			event: eventId
 		}
 
 		const res = await fetch(`${API_URL}/reviews`, {
@@ -94,8 +96,8 @@ export default function Reviews({ userId, name, reviews, token }) {
 					<div className={styles.inputContainer}>
 						<textarea
 							placeholder='What do you think?'
-							value={desc}
-							onChange={e => setDesc(e.target.value)}
+							value={description}
+							onChange={e => setDescription(e.target.value)}
 						></textarea>
 						<div className={styles.row}>
 							<div className={styles.opinion}>
@@ -126,6 +128,7 @@ export default function Reviews({ userId, name, reviews, token }) {
 									<input
 										type='radio'
 										name='attendance'
+										value='no'
 										id='no'
 										onChange={e => setAttendance(e.target.value)}
 									/>
@@ -173,9 +176,9 @@ export default function Reviews({ userId, name, reviews, token }) {
 								)}
 								<div className={styles.opinion}>"{review.description}"</div>
 								<div className={styles.name}>
-									{review.name} at{' '}
+									{review.name}{' '}
 									<span>
-										{new Date(review.created_at).toLocaleDateString('en-GB')}
+										at {new Date(review.created_at).toLocaleDateString('en-GB')}
 									</span>
 								</div>
 							</div>

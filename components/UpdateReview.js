@@ -4,10 +4,11 @@ import { API_URL } from '@/config/index'
 import styles from '@/styles/Review.module.css'
 
 export default function UpdateReview({ name, review, updateReview, token }) {
-	const [desc, setDesc] = useState(review.description)
+	const [description, setDescription] = useState(review.description)
 	const [attend, setAttend] = useState(review.attendance)
 
-	const onSubmit = async () => {
+	const onSubmit = async e => {
+		e.preventDefault()
 		const values = {
 			description,
 			attendance: attend,
@@ -31,8 +32,8 @@ export default function UpdateReview({ name, review, updateReview, token }) {
 		<div className={styles.inputContainer}>
 			<textarea
 				placeholder='How did you change your mind?'
-				value={desc}
-				onChange={e => setDesc(e.target.value)}
+				value={description}
+				onChange={e => setDescription(e.target.value)}
 			></textarea>
 			<div className={styles.row}>
 				<div className={styles.opinion}>
@@ -71,7 +72,7 @@ export default function UpdateReview({ name, review, updateReview, token }) {
 				<button
 					className='btn btn-primary'
 					type='submit'
-					onClick={() => onSubmit}
+					onClick={e => onSubmit(e)}
 				>
 					Submit
 				</button>

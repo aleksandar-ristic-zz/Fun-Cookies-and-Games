@@ -11,7 +11,6 @@ import Reviews from '@/components/Reviews'
 
 export default function EventPage({ evt, usersEvent, userId, token, name }) {
 	const router = useRouter()
-	console.log(evt)
 
 	const deleteEvent = async () => {
 		if (confirm('Are you sure?')) {
@@ -95,6 +94,7 @@ export default function EventPage({ evt, usersEvent, userId, token, name }) {
 
 				<Reviews
 					userId={userId}
+					eventId={evt.id}
 					name={name}
 					token={token}
 					reviews={evt.reviews}

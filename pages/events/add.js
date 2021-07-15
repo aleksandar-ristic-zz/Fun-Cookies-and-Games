@@ -42,7 +42,7 @@ export default function AddEventPage({ token }) {
 
 		if (!res.ok) {
 			if (res.status === 403 || res.status === 401) {
-				toast.error(' Please login first.')
+				toast.error('Please login first.')
 				return
 			}
 
