@@ -41,7 +41,11 @@
 .opinion {
 	margin: 2.5rem 0;
 }
-.opinion h4 {
+.update {
+	margin-bottom: 1.5rem;
+}
+.opinion h4,
+.update h4 {
 	margin-bottom: 0.5rem;
 	color: #ff80a9;
 	font-size: 1.25rem;
@@ -73,7 +77,8 @@
 	border-top-right-radius: 0.35rem;
 	border-bottom-right-radius: 0.35rem;
 }
-.opinion label:hover {
+.opinion label:hover,
+.opinion label:active {
 	background-color: #ff80a9;
 }
 .opinion label:focus-within {
@@ -166,4 +171,38 @@
 }
 .edit {
 	color: #ffea00;
+}
+
+@media (max-width: 800px) {
+	.reviewContainer {
+		padding: 3rem 2rem 1rem;
+	}
+}
+@media (max-width: 500px) {
+	.reviewContainer {
+		padding: 3rem 1rem 1rem;
+	}
+	.reviewWrapper,
+	.inputContainer {
+		align-items: center;
+	}
+	.inputContainer textarea {
+		width: 100%;
+		max-width: 100%;
+	}
+	.review {
+		max-width: 100%;
+	}
+	.opinion label {
+		display: block;
+		width: 50%;
+		margin: 0.3rem auto;
+		text-align: center;
+		border-radius: 0.5rem;
+		padding: 0;
+	}
+	.btnSm {
+		margin: auto;
+		width: 50%;
+	}
 }

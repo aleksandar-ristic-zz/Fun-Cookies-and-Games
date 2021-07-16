@@ -14,6 +14,10 @@
 	color: aliceblue;
 	margin-bottom: 10px;
 }
+.event div span {
+	display: inline-block;
+	margin: 0 10px;
+}
 .edit,
 .delete {
 	color: blueviolet;

@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import 'react-toastify/dist/ReactToastify.css'
+import { GiPartyPopper } from 'react-icons/gi'
+import { MdNotInterested } from 'react-icons/md'
 import { API_URL } from '@/config/index'
 import styles from '@/styles/Review.module.css'
 
 export default function UpdateReview({ name, review, updateReview, token }) {
 	const [description, setDescription] = useState(review.description)
-	const [attend, setAttend] = useState(review.attendance)
+	const [attend, setAttend] = useState(review.attendance || 'maybe')
 
 	const onSubmit = async e => {
 		e.preventDefault()
@@ -30,6 +32,19 @@ export default function UpdateReview({ name, review, updateReview, token }) {
 
 	return (
 		<div className={styles.inputContainer}>
+			<div className={styles.update}>
+				<h4>
+					Update Review{' '}
+					{attend === 'going' ? (
+						<GiPartyPopper />
+					) : attend === 'no' ? (
+						<MdNotInterested />
+					) : (
+						<></>
+					)}
+				</h4>
+			</div>
+
 			<textarea
 				placeholder='How did you change your mind?'
 				value={description}

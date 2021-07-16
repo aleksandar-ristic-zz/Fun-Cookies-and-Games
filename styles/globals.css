@@ -50,7 +50,8 @@ h3 span {
 	background-size: 200%;
 	background-position: right;
 }
-.btn-primary:hover {
+.btn-primary:hover,
+.btn-primary:active {
 	background-position: center;
 }
 .btn-primary:disabled {
@@ -63,7 +64,8 @@ h3 span {
 	background-size: 200%;
 	background-position: left;
 }
-.btn-secondary:hover {
+.btn-secondary:hover,
+.btn-secondary:active {
 	background-position: right;
 }
 .btn-outline {
@@ -73,7 +75,8 @@ h3 span {
 	background-color: #571089;
 	z-index: 1;
 }
-.btn-outline:hover {
+.btn-outline:hover,
+.btn-outline:active {
 	color: aliceblue;
 	background-color: #571089;
 }

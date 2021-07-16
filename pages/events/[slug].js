@@ -4,16 +4,42 @@ import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Link from 'next/link'
 import { FaPencilAlt, FaTimes, FaArrowLeft } from 'react-icons/fa'
+import { GiPartyPopper } from 'react-icons/gi'
+import { MdNotInterested } from 'react-icons/md'
 import Layout from '@/components/Layout'
 import { API_URL } from '@/config/index'
 import styles from '@/styles/Event.module.css'
 import Reviews from '@/components/Reviews'
 
-export default function EventPage({ evt, usersEvent, userId, token, name }) {
+export default function EventPage({
+	evt,
+	usersEvent,
+	userId,
+	token,
+	going,
+	notGoing,
+	name
+}) {
 	const router = useRouter()
 
 	const deleteEvent = async () => {
 		if (confirm('Are you sure?')) {
+			evt.reviews.forEach(async review => {
+				const res = await fetch(`${API_URL}/reviews/${review.id}`, {
+					method: 'DELETE',
+					headers: {
+						Authorization: `Bearer ${token}`
+					}
+				})
+
+				const data = await res.json()
+
+				if (!res.ok) {
+					toast.error(data.message)
+					return
+				}
+			})
+
 			const res = await fetch(`${API_URL}/events/${evt.id}`, {
 				method: 'DELETE',
 				headers: {
@@ -69,6 +95,12 @@ export default function EventPage({ evt, usersEvent, userId, token, name }) {
 						<span className={styles.date}>
 							{new Date(evt.date).toLocaleDateString('en-GB')}
 						</span>
+						<div className={styles.attendance}>
+							<GiPartyPopper /> <span title='Hyped for it!'>{going}</span>{' '}
+							<MdNotInterested />
+							<span title='Not making it.'>{notGoing}</span>
+						</div>
+
 						<h1>{evt.name}</h1>
 						<div className={styles.infoWrapper}>
 							<div className={styles.venue}>{evt.venue}</div>
@@ -123,6 +155,12 @@ export async function getServerSideProps({ query: { slug }, req }) {
 	const res = await fetch(`${API_URL}/events?slug=${slug}`)
 	const events = await res.json()
 
+	const resGo = await fetch(`${API_URL}/reviews/count?attendance=going`)
+	const going = await resGo.json()
+
+	const resNo = await fetch(`${API_URL}/reviews/count?attendance=no`)
+	const notGoing = await resNo.json()
+
 	if (user) {
 		name = user[0].user.username
 		if (user.filter(u => u.id === events[0].id).length === 1) {
@@ -136,6 +174,8 @@ export async function getServerSideProps({ query: { slug }, req }) {
 			usersEvent,
 			name,
 			userId: user[0].user.id,
+			going,
+			notGoing,
 			token
 		}
 	}

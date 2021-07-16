@@ -4,6 +4,8 @@ import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Link from 'next/link'
 import { FaPencilAlt, FaTimes, FaUserAlt } from 'react-icons/fa'
+import { GiPartyPopper } from 'react-icons/gi'
+import { MdNotInterested } from 'react-icons/md'
 import { API_URL } from '@/config/index'
 import styles from '@/styles/Review.module.css'
 import UpdateReview from './UpdateReview'
@@ -135,7 +137,7 @@ export default function Reviews({ eventId, userId, name, reviews, token }) {
 								</label>
 							</div>
 							<button
-								className='btn btn-primary'
+								className={`btn btn-primary ${styles.btnSm}`}
 								type='submit'
 								onClick={createReview}
 							>
@@ -150,7 +152,17 @@ export default function Reviews({ eventId, userId, name, reviews, token }) {
 						<h3>No reviews yet.</h3>
 					) : (
 						reviews.map(review => (
-							<div key={review.id} className={styles.review}>
+							<div
+								key={review.id}
+								className={styles.review}
+								title={
+									review.attendance === 'going'
+										? 'Hyped for it!'
+										: review.attendance === 'no'
+										? 'Not going to make it.'
+										: 'Maybe yes, maybe not.'
+								}
+							>
 								{userId === review.user && (
 									<>
 										<div className={styles.controls}>
@@ -176,9 +188,11 @@ export default function Reviews({ eventId, userId, name, reviews, token }) {
 								)}
 								<div className={styles.opinion}>"{review.description}"</div>
 								<div className={styles.name}>
+									{review.attendance === 'going' && <GiPartyPopper />}
+									{review.attendance === 'no' && <MdNotInterested />}{' '}
 									{review.name}{' '}
 									<span>
-										at {new Date(review.created_at).toLocaleDateString('en-GB')}
+										on {new Date(review.created_at).toLocaleDateString('en-GB')}
 									</span>
 								</div>
 							</div>

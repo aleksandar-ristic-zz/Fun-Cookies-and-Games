@@ -11,6 +11,7 @@
 	display: flex;
 }
 .cardDetails {
+	position: relative;
 	flex: 1;
 	padding: 2rem 5rem;
 	border-top-left-radius: 10vh;
@@ -27,6 +28,14 @@
 	font-size: 1.125rem;
 	font-weight: 300;
 	line-height: 1.4;
+}
+.attendance {
+	position: absolute;
+	right: 1rem;
+	top: 2rem;
+}
+.attendance span:first-of-type {
+	color: #6d23b6;
 }
 .date {
 	letter-spacing: 2px;
@@ -46,7 +55,8 @@
 	border-radius: 1rem;
 	transition: transform 0.3s ease;
 }
-.infoWrapper > *:hover {
+.infoWrapper > *:hover,
+.infoWrapper > *:active {
 	transform: translateY(-0.3rem);
 }
 .infoWrapper > *::before {
@@ -62,7 +72,8 @@
 	transition: all 0.3s ease 0.2s;
 	opacity: 0;
 }
-.infoWrapper > *:hover::before {
+.infoWrapper > *:hover::before,
+.infoWrapper > *:active::before {
 	bottom: -1.8rem;
 	transform: translateX(-50%) rotateX(-70deg);
 	opacity: 0.2;
@@ -92,7 +103,7 @@
 		135deg,
 		rgba(100, 92, 0, 0.2),
 		rgba(100, 30, 53, 0.2),
-		rgba(255, 0, 84, 0.2)
+		rgba(255, 0, 84, 1)
 	);
 }
 .cardImg img {
@@ -136,4 +147,34 @@
 }
 .edit {
 	color: #ffea00;
+}
+
+@media (max-width: 800px) {
+	.card {
+		flex-direction: column-reverse;
+	}
+	.cardDetails {
+		border-radius: 0;
+		padding: 2rem;
+	}
+	.cardImg {
+		border-radius: 10vh 10vh 0 0;
+	}
+	.cardImg::before {
+		background: linear-gradient(
+			180deg,
+			rgba(100, 92, 0, 0.2),
+			rgba(100, 30, 53, 0.2) 80%,
+			rgba(255, 0, 84, 1) 99%
+		);
+	}
+}
+@media (max-width: 500px) {
+	.cardDetails,
+	.added {
+		padding: 1rem;
+	}
+	.controls {
+		right: 1rem;
+	}
 }
