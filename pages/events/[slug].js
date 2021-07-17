@@ -11,16 +11,17 @@ import { API_URL } from '@/config/index'
 import styles from '@/styles/Event.module.css'
 import Reviews from '@/components/Reviews'
 
-export default function EventPage({
-	evt,
-	usersEvent,
-	userId,
-	token,
-	going,
-	notGoing,
-	name
-}) {
+export default function EventPage({ evt, usersEvent, userId, token, name }) {
 	const router = useRouter()
+
+	let going = null
+	let notGoing = null
+
+	evt.reviews.forEach(review => {
+		if (review.attendance === 'going') going++
+
+		if (review.attendance === 'no') notGoing++
+	})
 
 	const deleteEvent = async () => {
 		if (confirm('Are you sure?')) {
@@ -96,9 +97,18 @@ export default function EventPage({
 							{new Date(evt.date).toLocaleDateString('en-GB')}
 						</span>
 						<div className={styles.attendance}>
-							<GiPartyPopper /> <span title='Hyped for it!'>{going}</span>{' '}
-							<MdNotInterested />
-							<span title='Not making it.'>{notGoing}</span>
+							{going && (
+								<>
+									<GiPartyPopper /> <span title='Hyped for it!'>{going}</span>{' '}
+								</>
+							)}
+							{notGoing && (
+								<>
+									{' '}
+									<MdNotInterested />
+									<span title='Not making it.'>{notGoing}</span>
+								</>
+							)}
 						</div>
 
 						<h1>{evt.name}</h1>
@@ -137,9 +147,10 @@ export default function EventPage({
 }
 
 export async function getServerSideProps({ query: { slug }, req }) {
-	const { token } = parseCookies(req)
+	let { token } = parseCookies(req)
 	let user = null
 	let name = null
+	let userId = null
 	let usersEvent = false
 
 	if (token) {
@@ -150,18 +161,15 @@ export async function getServerSideProps({ query: { slug }, req }) {
 			}
 		})
 		user = await lu.json()
+	} else {
+		token = null
 	}
 
 	const res = await fetch(`${API_URL}/events?slug=${slug}`)
 	const events = await res.json()
 
-	const resGo = await fetch(`${API_URL}/reviews/count?attendance=going`)
-	const going = await resGo.json()
-
-	const resNo = await fetch(`${API_URL}/reviews/count?attendance=no`)
-	const notGoing = await resNo.json()
-
 	if (user) {
+		userId = user[0].user.id
 		name = user[0].user.username
 		if (user.filter(u => u.id === events[0].id).length === 1) {
 			usersEvent = true
@@ -173,9 +181,7 @@ export async function getServerSideProps({ query: { slug }, req }) {
 			evt: events[0],
 			usersEvent,
 			name,
-			userId: user[0].user.id,
-			going,
-			notGoing,
+			userId,
 			token
 		}
 	}

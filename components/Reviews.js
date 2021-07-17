@@ -92,7 +92,7 @@ export default function Reviews({ eventId, userId, name, reviews, token }) {
 								<FaUserAlt /> <span>Login</span>
 							</a>
 						</Link>{' '}
-						first in order to leave comments.
+						You need to login first in order to leave comments.
 					</p>
 				) : (
 					<div className={styles.inputContainer}>
@@ -186,7 +186,10 @@ export default function Reviews({ eventId, userId, name, reviews, token }) {
 										</div>
 									</>
 								)}
-								<div className={styles.opinion}>"{review.description}"</div>
+								{review.description.trim() && (
+									<div className={styles.opinion}>"{review.description}"</div>
+								)}
+
 								<div className={styles.name}>
 									{review.attendance === 'going' && <GiPartyPopper />}
 									{review.attendance === 'no' && <MdNotInterested />}{' '}
