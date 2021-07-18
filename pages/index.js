@@ -6,7 +6,7 @@ import { API_URL } from '@/config/index'
 export default function HomePage({ events }) {
 	return (
 		<Layout>
-			<h2>Upcoming Fun</h2>
+			<h2>Upcoming Fun Activities</h2>
 			<p>Stuff to do in your neighborhood.</p>
 			{events.length === 0 && <h3>No events at the moment.</h3>}
 

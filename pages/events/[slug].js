@@ -60,7 +60,7 @@ export default function EventPage({ evt, usersEvent, userId, token, name }) {
 	}
 
 	return (
-		<Layout title='An Activity | fun, cookies, games'>
+		<Layout title={`${evt.name} | fun, cookies, games`}>
 			<div className={styles.container}>
 				<div className={styles.added}>
 					<Link href='/events'>

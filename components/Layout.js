@@ -26,7 +26,8 @@ export default function Layout({ title, keywords, description, children }) {
 }
 
 Layout.defaultProps = {
-	title: 'DJ Events | Find the hottest parties',
-	description: 'Find the latest DJ and other musical events',
-	keywords: 'music, dj, edm, events'
+	title: 'We find the most fun, cookies and games',
+	description:
+		'Find the best fun, activities, parties, stuff, events and so much cookies.',
+	keywords: 'music, dj, events, fun, summer, party, activities, cookies'
 }

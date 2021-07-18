@@ -76,7 +76,7 @@ export default function EditEventPage({ evt, token }) {
 	}
 
 	return (
-		<Layout title='Edit Activity | fun, cookies and games'>
+		<Layout title={`Edit ${evt.name} | fun, cookies and games`}>
 			<Link href='/account/dashboard'>
 				<a className='btn-icon'>
 					<FaArrowLeft />

@@ -32,7 +32,7 @@ export default function DashboardPage({ events, token }) {
 	}
 
 	return (
-		<Layout title='User Dashboard | Fun, Cookies and Games'>
+		<Layout title={`${events[0].user.name} Dashboard | Fun, Cookies and Games`}>
 			<div className={styles.dash}>
 				<h1>Dashboard</h1>
 

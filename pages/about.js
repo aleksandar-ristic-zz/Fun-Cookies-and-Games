@@ -10,6 +10,13 @@ export default function AboutPage() {
 				activities.
 			</p>
 			<p>Version: 1.0.2</p>
+			<h3>Changes:</h3>
+			<ul>
+				<li>Added reviews</li>
+				<li>Added attendance</li>
+				<li>You can see how many are/not coming to event</li>
+				<li>A number of minor tweaks and polishes</li>
+			</ul>
 			<Link href='/'>Home</Link>
 		</Layout>
 	)

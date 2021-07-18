@@ -21,7 +21,7 @@ export default function LoginPage() {
 	}
 
 	return (
-		<Layout title='User Login | DJ Events'>
+		<Layout title='User Login | fun, cookies and games'>
 			<div className={styles.auth}>
 				<h1 className='btn-icon'>
 					<FaUser /> Log In

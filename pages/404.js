@@ -5,12 +5,12 @@ import Link from 'next/link'
 
 export default function NotFoundPage() {
 	return (
-		<Layout title=' 404 Page Not Found'>
+		<Layout title=' 404 Cookies Not Found'>
 			<div className={styles.error}>
 				<h1>
 					<FaExclamationTriangle /> 404
 				</h1>
-				<h4>Sorry, there is no event here.</h4>
+				<h4>Sorry, there is nothing fun here.</h4>
 				<Link href='/'>
 					<a className='btn-icon'>
 						<FaArrowLeft /> Go Home
