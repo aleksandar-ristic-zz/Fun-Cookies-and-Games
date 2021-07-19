@@ -92,7 +92,7 @@ export default function Reviews({ eventId, userId, name, reviews, token }) {
 								<FaUserAlt /> <span>Login</span>
 							</a>
 						</Link>{' '}
-						You need to login first in order to leave comments.
+						You need to login first in order to leave reviews.
 					</p>
 				) : (
 					<div className={styles.inputContainer}>

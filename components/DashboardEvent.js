@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { useState, useEffect } from 'react'
 import { FaPencilAlt, FaTimes } from 'react-icons/fa'
 import { GiPartyPopper } from 'react-icons/gi'
 import { MdNotInterested } from 'react-icons/md'
@@ -7,12 +8,16 @@ import styles from '@/styles/DashboardEvent.module.css'
 export default function DashboardEvent({ evt, handleDelete }) {
 	let going = null
 	let notGoing = null
+	const [going, setGoing] = useState(null)
+	const [notGoing, setNotGoing] = useState(null)
 
-	evt.reviews.forEach(review => {
-		if (review.attendance === 'going') going++
+	useEffect(() => {
+		evt.reviews.forEach(review => {
+			if (review.attendance === 'going') setGoing(going + 1)
 
-		if (review.attendance === 'no') notGoing++
-	})
+			if (review.attendance === 'no') setNotGoing(notGoing + 1)
+		})
+	}, [evt.reviews])
 
 	return (
 		<div className={styles.event}>

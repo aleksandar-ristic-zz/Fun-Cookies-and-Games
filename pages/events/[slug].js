@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router'
+import { useState, useEffect } from 'react'
 import { parseCookies } from '@/helpers/index'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -7,6 +8,8 @@ import { FaPencilAlt, FaTimes, FaArrowLeft } from 'react-icons/fa'
 import { GiPartyPopper } from 'react-icons/gi'
 import { MdNotInterested } from 'react-icons/md'
 import Layout from '@/components/Layout'
+import Modal from '@/components/Modal'
+import EventMap from '@/components/EventMap'
 import { API_URL } from '@/config/index'
 import styles from '@/styles/Event.module.css'
 import Reviews from '@/components/Reviews'
@@ -14,14 +17,17 @@ import Reviews from '@/components/Reviews'
 export default function EventPage({ evt, usersEvent, userId, token, name }) {
 	const router = useRouter()
 
-	let going = null
-	let notGoing = null
+	const [going, setGoing] = useState(null)
+	const [notGoing, setNotGoing] = useState(null)
+	const [showModal, setShowModal] = useState(false)
 
-	evt.reviews.forEach(review => {
-		if (review.attendance === 'going') going++
+	useEffect(() => {
+		evt.reviews.forEach(review => {
+			if (review.attendance === 'going') setGoing(going + 1)
 
-		if (review.attendance === 'no') notGoing++
-	})
+			if (review.attendance === 'no') setNotGoing(notGoing + 1)
+		})
+	}, [evt.reviews])
 
 	const deleteEvent = async () => {
 		if (confirm('Are you sure?')) {
@@ -112,9 +118,18 @@ export default function EventPage({ evt, usersEvent, userId, token, name }) {
 						</div>
 
 						<h1>{evt.name}</h1>
-						<div className={styles.infoWrapper}>
+						<div
+							className={styles.infoWrapper}
+							onClick={() => {
+								setShowModal(true)
+							}}
+						>
 							<div className={styles.venue}>{evt.venue}</div>
-							<div className={styles.address}>{evt.address}</div>
+							<div className={styles.address}>
+								{evt.address.length > 25
+									? evt.address.substring(0, 24).concat('...')
+									: evt.address}
+							</div>
 							<div className={styles.time}>{evt.time}</div>
 						</div>
 						<p className={styles.desc}>{evt.description}</p>
@@ -133,7 +148,9 @@ export default function EventPage({ evt, usersEvent, userId, token, name }) {
 						</div>
 					)}
 				</div>
-
+				<Modal show={showModal} onClose={() => setShowModal(false)}>
+					<EventMap evt={evt} />
+				</Modal>
 				<Reviews
 					userId={userId}
 					eventId={evt.id}
