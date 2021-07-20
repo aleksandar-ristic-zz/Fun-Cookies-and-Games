@@ -4,6 +4,7 @@ import EventItem from '@/components/EventItem'
 import { API_URL } from '@/config/index'
 
 export default function HomePage({ events }) {
+	console.log(events)
 	return (
 		<Layout>
 			<h2>Upcoming Fun Activities</h2>
