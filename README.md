@@ -45,6 +45,13 @@ from the creators of Next.js.
 Check out [Next.js deployment documentation](https://nextjs.org/docs/deployment)
 for more details.
 
+### .env Variables
+
+- NEXT_PUBLIC_API_URL : backend url
+- NEXT_PUBLIC_FRONTEND : app url
+- NEXT_PUBLIC_MAPBOX_API_TOKEN : from mapbox account
+- NEXT_PUBLIC_GOOGLE_MAP_API_KEY : from google account
+
 ## Project
 
 Web App for parties and other fun activites, where people can add new events,
