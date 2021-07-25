@@ -15,7 +15,7 @@ export default function Header() {
 				<Link href='/'>
 					<a>
 						<Image
-							src='/logo_gradient.svg'
+							src='/logo_gradient.png'
 							alt='logo'
 							width='150'
 							height='60px'
