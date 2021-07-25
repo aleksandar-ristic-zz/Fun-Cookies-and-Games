@@ -6,8 +6,6 @@ import { MdNotInterested } from 'react-icons/md'
 import styles from '@/styles/DashboardEvent.module.css'
 
 export default function DashboardEvent({ evt, handleDelete }) {
-	let going = null
-	let notGoing = null
 	const [going, setGoing] = useState(null)
 	const [notGoing, setNotGoing] = useState(null)
 
